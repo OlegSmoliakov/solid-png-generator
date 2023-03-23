@@ -7,8 +7,6 @@
   - [ImageMagick](https://imagemagick.org/script/download.php)
  
 You can change amount of pic, resolution pic, name pic and loop parameters in start_generation.bat
-
- The script creates all the files in the folder where it is located
  
 ## Example color format 
 
