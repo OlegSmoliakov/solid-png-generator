@@ -4,7 +4,7 @@
  First of all, you need to install ImageMagick on your PC   (I used ImageMagick-7.1.1)
   - [ImageMagick](https://imagemagick.org/script/download.php)
  
-You can change amount of pic, resolution pic, name pic and loop parameters in start_generation.bat
+You can change the number of images, image names, and loop parameters in main.bat
  
 ## Example color format 
 
