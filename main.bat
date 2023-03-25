@@ -3,7 +3,13 @@
 set /p location="Enter folder name: " 
 mkdir %location%
 cd %location%
-set /p resolution="Enter resolution separated by a english 'x': " 
+set /p resolution="Enter resolution separated by a english 'x': "
+set resolution=%resolution: =%
+
+	:: replacing cyrillic 'x' to latin 'x'
+if not x%resolution:х=%==x%resolution% (
+	set resolution=%resolution:х=x%
+) 
 mkdir %resolution%
 cd %resolution%
 
