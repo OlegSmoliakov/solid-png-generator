@@ -1,10 +1,24 @@
 @echo off
 	::create folder
-set /p location="Enter folder name: " 
-mkdir %location%
-cd %location%
+set /p folder="Enter folder name: " 
+set folder=%folder: =%
+mkdir %folder%
+cd %folder%
+
+set localPath=%CD%
+
 set /p resolution="Enter resolution separated by a english 'x': "
 set resolution=%resolution: =%
+	:: replacing cyrillic 'x' to latin 'x'
+if not x%resolution:х=%==x%resolution% (
+	set resolution=%resolution:х=x%
+) 
+
+if not exist "%resolution%" (
+	echo ---------------------------- >> %localPath%\list.txt
+	echo In this %resolution% folder: >> %localPath%\list.txt
+)
+
 mkdir %resolution%
 cd %resolution%
 
@@ -17,31 +31,38 @@ set /p start="Enter the color change start: "
 if %start% LSS 0 goto :start_start
 if %start% GTR 255 goto :start_start
 
-set /p step="Enter the color change step: "
-
 :start_end
 set /p end="Enter the color change end: "
-if %start% LSS 0 goto :start_end
-if %start% GTR 255 goto :start_end
+if %end% LSS 0 goto :start_end
+if %end% GTR 255 goto :start_end
 
-	:: replacing cyrillic 'x' to latin 'x'
-if not x%resolution:х=%==x%resolution% (
-	set resolution=%resolution:х=x%
-) 
+set /p step="Enter the color change step: "
 
-set /a var = %start% 
+set /a x = %start% 
 :start
+if %x% GTR %end% goto end
+	cmd /C exit %x%
+	set "HEX=%=ExitCode%"
+	set HEX=%HEX:~6,8%
 	
-    	:: step must be calculated manually
-	if %var% GTR %end% goto end
-		set /a "temp" = %var%
-		cmd /C exit %temp%
-		set "HEX=%=ExitCode%"
-        set HEX=%HEX:~6,8%
-		echo %var% %HEX%
-			:: uncomment this to check the funtionality
-		magick convert -size %resolution% xc:#%HEX%%HEX%%HEX% %var%_%var%_%var%.png
-	set /a var+= %step%
+	set out_x=%x%
+
+	if %out_x% GTR 99 goto skip
+	if %out_x% GTR 9 (
+		SET out_x=0%out_x%
+	) else (
+		SET out_x=00%out_x%
+	)
+	:skip
+
+	echo %x% %out_x% %HEX%
+
+		:: uncomment\comment this to check the funtionality
+	:: magick convert -size %resolution% xc:#%HEX%%HEX%%HEX% %out_x%_%out_x%_%out_x%.png
+		
+	echo %out_x%_%out_x%_%out_x%.png >> %localPath%\list.txt
+
+	set /a x+= %step%
 goto start
 :end
 
