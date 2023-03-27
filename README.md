@@ -1,17 +1,32 @@
-# solid-background-generator
- Script helps to create a lot of solid backgrounds
- 
- First of all, you need to install ImageMagick on your PC   (I used ImageMagick-7.1.1)
-  - [ImageMagick](https://imagemagick.org/script/download.php)
- 
-You can change the number of images, image names, and loop parameters in main.bat
- 
-## Example color format 
+# Solid-png-generator
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Example Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
-| Example Color | ![#f8f8f8](https://via.placeholder.com/10/f8f8f8?text=+) #f8f8f8 |
-| Example Color | ![#00b48a](https://via.placeholder.com/10/00b48a?text=+) #00b48a |
-| Example Color | ![#00d1a0](https://via.placeholder.com/10/00b48a?text=+) #00d1a0 |
+Script helps to create a lot of solid png backgrounds   
+
+You can change image names and loop parameters in `main.bat` via any text editor
+
+
+Main comand: 
+`magick convert -size %resolution% xc:#%HEX%%HEX%%HEX% %out_x%_%out_x%_%out_x%.png`
+
+You can change:
+- Resolution
+- RGB color (after `xc:`) if you change it manualy, use HEX values
+- The names of the images to be created (I use decimal color values separated by `_`)
+
+The color depends on the order and value of the 3 HEX numbers after `xc:`
+
+By default you should use **decimal** values for colors
+
+
+## Installation and use
+
+ 1. First of all, you need to install **[ImageMagick](https://imagemagick.org/script/download.php)** on your PC
+ 2. Start `main.bat`
+    ## Example color format 
+
+| Color   | Decimal code (R, G, B) | Hex #RRGGBB |
+|---------|-------------------|-----|
+| Spring green | (0, 255, 127) |![#00FF7F](https://via.placeholder.com/20/00FF7F?text=+) #00FF7F |
+| Sienna | (160, 82, 45) |![#A0522D](https://via.placeholder.com/20/A0522D?text=+) #A0522D |
+| Lemon chiffon | (255,250,205) |![#FFFACD](https://via.placeholder.com/20/FFFACD?text=+) #FFFACD |
 
